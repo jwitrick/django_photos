@@ -1,0 +1,76 @@
+{% extends "photos/base.html" %}
+
+{% block extrahead %}
+    {{block.super}}
+    {% block extrastyle %}
+        {{block.super}}
+        <link rel="stylesheet" type="text/css" href="/media/_slideshow/jquery.ad-gallery.css" />
+    {% endblock %}
+    <script type="text/javascript" src="/media/_slideshow/jquery.ad-gallery.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var galleries = $('.ad-gallery').adGallery({
+            loader_image: '/media/_slideshow/loader.gif'
+        });
+        $('#switch-effect').change(
+            function() {
+                galleries[0].settings.effect = $(this).val();
+                return false;
+            }
+        );
+        $('#toggle-slideshow').click(
+            function() {
+                galleries[0].slideshow.toggle();
+                return false;
+            }
+        );
+        $('#toggle-description').click(
+            function() {
+                if(!galleries[0].settings.description_wrapper) {
+                    galleries[0].settings.description_wrapper = $('#descriptions');
+                } else {
+                    galleries[0].settings.description_wrapper = false;
+                }
+                return false;
+            }
+        );
+    });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <div id='gallery' class="ad-gallery">
+        <div class="ad-image-wrapper">
+        </div>
+        <div class="ad-controls">
+        </div>
+        <div class="ad-nav">
+            <div class="ad-thumbs">
+                <ul class="ad-thumb-list">
+                    {% for photo in photos %}
+                        <li>
+                            <a href="/media{{photo}}">
+                                <img src="/media{{photo}}">
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id='slideshow_options' class='ss-options'>
+        <p>Examples of how you can alter the behaviour on the fly;
+            Effect:
+            <select id="switch-effect">
+                <option value="slide-hori">Slide horizontal</option>
+                <option value="slide-vert">Slide vertical</option>
+                <option value="resize">Shrink/grow</option>
+                <option value="fade">Fade</option>
+                <option value="">None</option>
+            </select><br>
+            <a href="#" id="toggle-slideshow">Toggle slideshow</a> |
+            <a href="#" id="toggle-description">Toggle having description outside of image</a>
+        </p>
+    </div>
+{% endblock %}

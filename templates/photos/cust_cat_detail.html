@@ -1,0 +1,17 @@
+
+{% extends "photos/base.html" %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block content%}
+
+<div id="category{{category}}">
+    <h3>Photo Galleries:</h3>
+    <div id="cust_galleries">
+        {% for gallery in galleries %}
+            <a href="{% url customer_cat_gallery_detail user.username,category,gallery %}">{{gallery}}</a>
+            <br></br>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

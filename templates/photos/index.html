@@ -1,0 +1,14 @@
+{% extends "photos/base.html" %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block content %}
+    <div id="content-main">
+        <div id='user_list'>
+            <h3>Customers:</h3>
+            {% for user in users %}
+                <a href="{% url customer_detail user%}">{{user}}</a>
+                <br> </br>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

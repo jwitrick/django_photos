@@ -1,0 +1,22 @@
+
+{% extends "photos/base.html" %}
+
+{% block breadcrumbs %}{% endblock %}
+{% block content%}
+<h1>{{user.username}}</h1>
+<div id='cust_desc'>
+    <h3>About Me:</h3>
+    <p>{{userprofile.description}}</p>
+</div>
+
+<div id="photos">
+    <h3>Photo Categories</h3>
+    <div id="cust_categories">
+        {% for category in categories %}
+            <a href="{% url customer_cat_detail user.username,category %}">{{category}}</a>
+            <br></br>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
