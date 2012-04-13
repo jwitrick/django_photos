@@ -24,19 +24,6 @@ class UserProfileAdmin(UserAdmin):
 
 admin.site.register(User, UserProfileAdmin)
 
-
-class CustomerAdmin(admin.ModelAdmin):
-    fields = ['username', 'password', 'email', 'enabled', 'description']
-    list_display = ('username', 'email', 'enabled')
-
-    def save_model(self, request, obj, form, change):
-        obj.save()
-        if not change:
-            cat_name = 'default'
-            desc = 'This is the default category all galleries go into'
-            c = Category(name=cat_name, customer=obj, description=desc)
-            c.save()
-
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ('name', 'user_name', "public")
 
