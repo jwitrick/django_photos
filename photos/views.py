@@ -2,7 +2,6 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.context_processors import csrf
-from photos.models.customer import Customer
 from photos.models.userprofile import UserProfile
 from photos.models.gallery import Gallery
 from photos.models.category import Category
