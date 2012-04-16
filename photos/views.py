@@ -32,8 +32,10 @@ def cust_cat_gallery_detail(reques, username, category, gallery):
     user = get_object_or_404(User, username=username)
     gallery = get_object_or_404(Gallery, name=gallery, user=user)
     files = gallery._get_thumbnail_photos_in_gallery()
-    return render_to_response('photos/cust_gallery_show.html', {'photos':files})
-    #return render_to_response('photos/cust_gallery_show_galleriffic.html', {'photos':files})
+    response = render_to_response('photos/cust_gallery_show.html', {'photos':files})
+    response.set_signed_cookie('test_cookie', 'name', expires=1)
+    #return render_to_response('photos/cust_gallery_show.html', {'photos':files})
+    return response
 
 def _get_all_users_except_staff():
     try:
